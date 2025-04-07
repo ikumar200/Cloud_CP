@@ -18,7 +18,7 @@ function App() {
           console.log('Firebase ID Token:', token);
 
           // Optional: send user data to your backend
-          const res = await fetch('http://localhost:3000/store_user_data', {
+          const res = await fetch('http://3.110.121.241/store_user_data', {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${token}`,
