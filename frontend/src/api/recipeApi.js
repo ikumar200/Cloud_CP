@@ -4,7 +4,7 @@ import { auth } from "../firebase"; // assuming you have this
 
 export const generateRecipe = async (ingredientsArray) => {
     try {
-        const response = await fetch("http://localhost:3000/llm/generate-recipe", {
+        const response = await fetch("http://34.227.190.136:3000/llm/generate-recipe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -34,7 +34,7 @@ export const saveGeneratedRecipe = async (recipeObject) => {
         if (!user) throw new Error("User not logged in");
         const token = await user.getIdToken();
 
-        const response = await fetch("http://localhost:3000/save_recipe", {
+        const response = await fetch("http://34.227.190.136:3000/save_recipe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -56,7 +56,7 @@ export const getSavedRecipes = async () => {
         if (!user) throw new Error("User not logged in");
         const token = await user.getIdToken();
 
-        const response = await fetch("http://localhost:3000/get_saved_recipes", {
+        const response = await fetch("http://34.227.190.136:3000/get_saved_recipes", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -75,7 +75,7 @@ export const deleteSavedRecipe = async (id) => {
         if (!user) throw new Error("User not logged in");
         const token = await user.getIdToken();
 
-        const response = await fetch(`http://localhost:3000/delete_recipe/${id}`, {
+        const response = await fetch(`http://34.227.190.136:3000/delete_recipe/${id}`, {
             method: "DELETE",
             headers: {
                 Authorization: `Bearer ${token}`,
