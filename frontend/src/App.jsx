@@ -29,7 +29,7 @@ function App() {
           const token = await currentUser.getIdToken();
           console.log(token);
 
-          const res = await fetch("http://34.227.190.136:3000/store_user_data", {
+          const res = await fetch("https://34.227.190.136/store_user_data", {
             method: "POST",
             headers: {
               Authorization: `Bearer ${token}`,
