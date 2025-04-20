@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-
 const admin = require("./firebase");
 const pool = require("./db");
 const llm=require("./app")
@@ -10,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// 🔐 Middleware to verify Firebase ID token
+// Middleware to verify Firebase ID token
 const authenticate = async (req, res, next) => {
   const token = req.headers.authorization?.split("Bearer ")[1];
   if (!token) return res.status(401).json({ error: "No token provided" });
@@ -24,7 +23,7 @@ const authenticate = async (req, res, next) => {
   }
 };
 
-// 📥 Store user data in DB after Firebase auth
+// Store user data in DB after Firebase auth
 app.post("/store_user_data", authenticate, async (req, res) => {
   const { email, name } = req.body;
   const uid = req.user.uid;
@@ -44,7 +43,7 @@ app.post("/store_user_data", authenticate, async (req, res) => {
 });
 
 
-// 📤 Get user data
+// Get user data
 app.get("/get_user_data", authenticate, async (req, res) => {
   const uid = req.user.uid;
 
@@ -60,10 +59,11 @@ app.get("/get_user_data", authenticate, async (req, res) => {
   }
 });
 
-// ✅ Health check
+// Health check
 app.get("/", (req, res) => res.send("API is running"));
 
-app.use("/llm", llm);
+// app.use("/llm", llm);
+app.use("/llm", llm); 
 
 app.post("/save_recipe", authenticate, async (req, res) => {
   const uid = req.user.uid;
@@ -89,6 +89,7 @@ app.get("/get_saved_recipes", authenticate, async (req, res) => {
       "SELECT id, recipe, saved_at FROM recipes WHERE uid = $1 ORDER BY saved_at DESC",
       [uid]
     );
+    console.log(result.rows)
     res.json(result.rows); // returns list of recipe JSONs
   } catch (err) {
     console.error("Error fetching recipes:", err);

@@ -22,16 +22,22 @@ const Home = () => {
       <InputForm onGenerate={handleGenerateRecipe} />
       <RecipeDisplay recipe={recipe} />
       {recipe && (
-        <button onClick={() => downloadRecipePDF(recipe)}>Download PDF</button>
-      )}
-      {recipe && (
-        <button
-        onClick={() => saveGeneratedRecipe(JSON.stringify(recipe))}
-        className="mt-4 bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
-      >
-        Save Recipe
-      </button>
-      )}
+  <div className="flex gap-4 mt-4">
+    <button
+      onClick={() => downloadRecipePDF(recipe)}
+      className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+    >
+      Download PDF
+    </button>
+    <button
+      onClick={() => saveGeneratedRecipe(JSON.stringify(recipe))}
+      className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+    >
+      Save Recipe
+    </button>
+  </div>
+)}
+
 
     </div>
   );
