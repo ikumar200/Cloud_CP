@@ -22,11 +22,11 @@ const Home = () => {
 
     const result = await saveGeneratedRecipe(JSON.stringify(recipe));
 
-    if (result.success) {
+    if (result.message) {
       setIsSaved(true);
     } else {
       alert("Failed to save recipe: " + result.error);
-    }
+    }    
 
     setIsSaving(false);
   };

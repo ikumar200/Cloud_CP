@@ -74,11 +74,7 @@ app.post("/save_recipe", authenticate, async (req, res) => {
       `INSERT INTO recipes (uid, recipe) VALUES ($1, $2)`,
       [uid, recipe]
     );
-    // res.status(200).json({ message: "Recipe saved successfully" });
-    res.status(500).json({
-      success: false,
-      error: "Could not save recipe",
-    });    
+    res.status(200).json({ message: "Recipe saved successfully" });
   } catch (err) {
     console.error("Error saving recipe:", err);
     res.status(500).json({ error: "Could not save recipe" });
